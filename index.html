@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stellaris Workstation - Balanced Audio Engine Console</title>
-    <!-- Tailwind CSS CDN for high-end studio rack layouts -->
+    <title>Stellaris Workstation - Premium Balanced Audio Engine Console</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- React & ReactDOM Core production bundles -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-    <!-- Premium Workspace Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght=600;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Share Tech Mono', monospace; background-color: #03050a; }
@@ -23,20 +20,10 @@
     <script type="text/javascript">
         const { useState, useEffect, useRef } = React;
 
-        // --- CORE ENGINE DEFINITIONS: 10 HIGH-VOICED PRESETS PER ENVIRONMENT ---
+        // --- Master Engine Profiles: 10 Fully Voiced Structural Matrices per Genre ---
         const ENGINE_PROFILES = {
             space: {
-                id: "space",
-                name: "Option A: Cinematic Space Ambient",
-                defaultBpm: 60,
-                themeClass: "text-cyan-400",
-                borderClass: "border-cyan-950/40",
-                bgClass: "bg-[#040817]",
-                gridStyles: { background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)', boxShadow: '0 0 14px #2563eb' },
-                padWave: 'sawtooth', 
-                arpWave: 'sine',
-                washFreq: 750,
-                washRes: 0.9,
+                id: "space", name: "Option A: Cinematic Space Ambient", defaultBpm: 60, themeClass: "text-cyan-400", borderClass: "border-cyan-950/40", bgClass: "bg-[#040817]", gridStyles: { background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)', boxShadow: '0 0 14px #2563eb' }, padWave: 'sawtooth', arpWave: 'sine', washFreq: 750, washRes: 0.9,
                 presets: [
                     { name: "Nebula Odyssey (G Minor Deep)", chords: [[98.00, 116.54, 146.83, 174.61], [77.78, 116.54, 130.81, 155.56], [130.81, 155.56, 196.00, 233.08], [87.31, 110.00, 130.81, 164.81]] },
                     { name: "Event Horizon (Blade Runner Shift)", chords: [[110.00, 130.81, 164.81, 196.00], [116.54, 146.83, 174.61, 220.00], [98.00, 116.54, 146.83, 174.61], [110.00, 138.59, 164.81, 220.00]] },
@@ -51,17 +38,7 @@
                 ]
             },
             lofi: {
-                id: "lofi",
-                name: "Option B: Tape-Flutter Lo-Fi Lounge",
-                defaultBpm: 74,
-                themeClass: "text-amber-500",
-                borderClass: "border-amber-950/40",
-                bgClass: "bg-[#0d0a08]",
-                gridStyles: { background: 'linear-gradient(135deg, #f59e0b, #b45309)', boxShadow: '0 0 14px #f59e0b' },
-                padWave: 'triangle', 
-                arpWave: 'sine',     
-                washFreq: 340,       
-                washRes: 0.3,
+                id: "lofi", name: "Option B: Tape-Flutter Lo-Fi Lounge", defaultBpm: 74, themeClass: "text-amber-500", borderClass: "border-amber-950/40", bgClass: "bg-[#0d0a08]", gridStyles: { background: 'linear-gradient(135deg, #f59e0b, #b45309)', boxShadow: '0 0 14px #f59e0b' }, padWave: 'triangle', arpWave: 'sine', washFreq: 340, washRes: 0.3,
                 presets: [
                     { name: "Rainy Sunday (Cmaj7 Jazz Base)", chords: [[130.81, 164.81, 196.00, 246.94], [110.00, 130.81, 164.81, 196.00], [146.83, 174.61, 220.00, 261.63], [98.00, 123.47, 146.83, 220.00]] },
                     { name: "Midnight Vinyl (Dm9 Suite)", chords: [[146.83, 174.61, 220.00, 261.63], [98.00, 146.83, 164.81, 220.00], [130.81, 164.81, 196.00, 246.94], [110.00, 138.59, 164.81, 207.65]] },
@@ -76,17 +53,7 @@
                 ]
             },
             cinema: {
-                id: "cinema",
-                name: "Option C: Minimalist Neo-Classical Ensemble",
-                defaultBpm: 52, // Soft, breathing orchestral tempo profile baseline
-                themeClass: "text-emerald-400",
-                borderClass: "border-emerald-950/40",
-                bgClass: "bg-[#040e09]",
-                gridStyles: { background: 'linear-gradient(135deg, #10b981, #047857)', boxShadow: '0 0 14px #10b981' },
-                padWave: 'triangle', // Pure physical bowing shape profile simulation
-                arpWave: 'sine',     // Felt hammer piano ostinato emulation point
-                washFreq: 220,       // Very low cutoff to capture microphone room-bleed mechanics
-                washRes: 0.1,
+                id: "cinema", name: "Option C: Minimalist Neo-Classical Ensemble", defaultBpm: 52, themeClass: "text-emerald-400", borderClass: "border-emerald-950/40", bgClass: "bg-[#040e09]", gridStyles: { background: 'linear-gradient(135deg, #10b981, #047857)', boxShadow: '0 0 14px #10b981' }, padWave: 'triangle', arpWave: 'sine', washFreq: 220, washRes: 0.1,
                 presets: [
                     { name: "Max's Heartbeat (D Major Add9 Melancholia)", chords: [[146.83, 185.00, 220.00, 293.66], [110.00, 146.83, 164.81, 220.00], [130.81, 164.81, 196.00, 261.63], [146.83, 174.61, 220.00, 293.66]] },
                     { name: "Arnalds Shoreline (B Minor 11 Cluster)", chords: [[123.47, 146.83, 164.81, 220.00], [146.83, 174.61, 220.00, 293.66], [98.00, 130.81, 146.83, 196.00], [110.00, 138.59, 164.81, 220.00]] },
@@ -99,22 +66,43 @@
                     { name: "Johansson Eulogy (Deep Cathedral)", chords: [[73.42, 110.00, 130.81, 164.81], [65.41, 98.00, 116.54, 146.83], [55.00, 82.41, 98.00, 110.00], [73.42, 110.00, 130.81, 164.81]] },
                     { name: "Chronos Reflection (Timeless Sub-Mix)", chords: [[146.83, 164.81, 220.00, 246.94], [130.81, 146.83, 196.00, 220.00], [110.00, 130.81, 164.81, 196.00], [146.83, 164.81, 220.00, 246.94]] }
                 ]
+            },
+            deepFocus: {
+                id: "deepFocus", name: "Option D: Deep Focus Essay Bed", defaultBpm: 50, themeClass: "text-violet-400", borderClass: "border-violet-950/40", bgClass: "bg-[#06040a]", gridStyles: { background: 'linear-gradient(135deg, #8b5cf6, #5b21b6)', boxShadow: '0 0 14px #8b5cf6' }, padWave: 'sine', arpWave: 'sine', washFreq: 480, washRes: 0.05,
+                presets: [
+                    { name: "Alpha State Anchor (50Hz Grounded)", chords: [[110.00, 164.81, 220.00, 329.63], [146.83, 220.00, 293.66, 440.00], [130.81, 196.00, 261.63, 392.00], [98.00, 146.83, 196.00, 293.66]] },
+                    { name: "Cognitive Pocket (Clean Mid Clearance)", chords: [[130.81, 164.81, 196.00, 261.63], [146.83, 174.61, 220.00, 293.66], [110.00, 130.81, 164.81, 220.00], [164.81, 196.00, 246.94, 329.63]] },
+                    { name: "Binaural Floor (Mathematical Sub)", chords: [[110.00, 130.81, 164.81, 196.00], [116.54, 146.83, 174.61, 220.00], [87.31, 110.00, 130.81, 164.81], [98.00, 116.54, 146.83, 174.61]] },
+                    { name: "Thalamus Synchronizer (Restive Mod)", chords: [[146.83, 185.00, 220.00, 293.66], [164.81, 207.65, 246.94, 329.63], [130.81, 164.81, 196.00, 246.94], [110.00, 138.59, 164.81, 220.00]] },
+                    { name: "Gamma Synapse (High-Crystalline Glass)", chords: [[164.81, 220.00, 261.63, 329.63], [196.00, 246.94, 293.66, 392.00], [146.83, 196.00, 220.00, 293.66], [130.81, 164.81, 196.00, 261.63]] },
+                    { name: "Isolation Shield (Linguistic Notch)", chords: [[87.31, 130.81, 174.61, 261.63], [110.00, 164.81, 220.00, 329.63], [130.81, 196.00, 261.63, 392.00], [77.78, 116.54, 155.56, 233.08]] },
+                    { name: "Neuroplasticity Glide (Open Add9)", chords: [[110.00, 146.83, 164.81, 246.94], [130.81, 174.61, 196.00, 293.66], [146.83, 196.00, 220.00, 329.63], [98.00, 130.81, 146.83, 220.00]] },
+                    { name: "Mental Slate (Pure White Noise Var)", chords: [[130.81, 164.81, 196.00, 246.94], [110.00, 130.81, 164.81, 220.00], [146.83, 174.61, 220.00, 261.63], [164.81, 196.00, 246.94, 293.66]] },
+                    { name: "Deep Thought Wave (Sub-60Hz Drones)", chords: [[73.42, 110.00, 146.83, 220.00], [65.41, 98.00, 130.81, 196.00], [55.00, 82.41, 110.00, 164.81], [73.42, 110.00, 146.83, 220.00]] },
+                    { name: "Hypnagogic Portal (Scientific 432Hz)", chords: [[108.00, 162.00, 216.00, 324.00], [144.00, 216.00, 288.00, 432.00], [129.60, 194.40, 259.20, 388.80], [97.20, 145.80, 194.40, 291.60]] }
+                ]
+            },
+            futureGarage: {
+                id: "futureGarage", name: "Option M: Future Garage Short Bed", defaultBpm: 132, themeClass: "text-rose-400", borderClass: "border-rose-950/40", bgClass: "bg-[#0b0305]", gridStyles: { background: 'linear-gradient(135deg, #f43f5e, #9f1239)', boxShadow: '0 0 14px #f43f5e' }, padWave: 'sine', arpWave: 'sine', washFreq: 640, washRes: 0.1,
+                presets: [
+                    { name: "Burial Memories (A Minor Nocturnal)", chords: [[110.00, 130.81, 164.81, 196.00], [146.83, 174.61, 220.00, 261.63], [130.81, 164.81, 196.00, 246.94], [98.00, 116.54, 146.83, 196.00]] },
+                    { name: "Night Train (Reese Mid Overtone)", chords: [[73.42, 110.00, 146.83, 174.61], [87.31, 116.54, 146.83, 220.00], [110.00, 130.81, 164.81, 220.00], [65.41, 98.00, 130.81, 164.81]] },
+                    { name: "Shell Gated Organ (Minor 11 Sus)", chords: [[146.83, 174.61, 220.00, 293.66], [130.81, 164.81, 196.00, 261.63], [110.00, 138.59, 164.81, 220.00], [164.81, 196.00, 246.94, 329.63]] },
+                    { name: "Kinsella Drift (Cinematic Syncopate)", chords: [[116.54, 146.83, 174.61, 220.00], [130.81, 164.81, 196.00, 246.94], [98.00, 130.81, 146.83, 196.00], [110.00, 146.83, 164.81, 220.00]] },
+                    { name: "Archangel Pluck (High Phone Translate)", chords: [[130.81, 164.81, 196.00, 293.66], [146.83, 185.00, 220.00, 329.63], [110.00, 146.83, 164.81, 220.00], [87.31, 116.54, 130.81, 174.61]] },
+                    { name: "Endorphin Flash (Reels Anchor 132)", chords: [[110.00, 130.81, 155.56, 196.00], [116.54, 146.83, 174.61, 220.00], [130.81, 155.56, 185.00, 233.08], [146.83, 174.61, 207.65, 261.63]] },
+                    { name: "South London Rain (Dust Accent)", chords: [[98.00, 123.47, 146.83, 220.00], [130.81, 164.81, 196.00, 246.94], [146.83, 174.61, 220.00, 261.63], [110.00, 130.81, 164.81, 220.00]] },
+                    { name: "Ghost Step (Muted Pad Luxury)", chords: [[146.83, 185.00, 220.00, 277.18], [116.54, 146.83, 174.61, 220.00], [130.81, 164.81, 196.00, 246.94], [98.00, 123.47, 146.83, 196.00]] },
+                    { name: "Street Halo (Evolving Overtone)", chords: [[110.00, 146.83, 164.81, 220.00], [130.81, 164.81, 196.00, 261.63], [146.83, 196.00, 246.94, 293.66], [87.31, 116.54, 130.81, 174.61]] },
+                    { name: "Distant Lights (Hypnagogic Soul)", chords: [[130.81, 164.81, 220.00, 246.94], [146.83, 174.61, 246.94, 261.63], [110.00, 138.59, 196.00, 207.65], [98.00, 123.47, 164.81, 220.00]] }
+                ]
             }
         };
 
         const PATTERN_VARIATIONS = {
-            sub: [
-                [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0]
-            ],
-            arp: [
-                [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-                [1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1]
-            ],
-            pings: [
-                [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0],
-                [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1]
-            ]
+            sub: [[1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0]],
+            arp: [[1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], [1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1]],
+            pings: [[0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0], [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1]]
         };
 
         function App() {
@@ -152,6 +140,7 @@
             const variationsRef = useRef(variations);
             const presetIdxRef = useRef(activePresetIdx);
             const isAmbientRef = useRef(isAmbientMode);
+            const activeEngineRef = useRef(activeEngine);
 
             useEffect(() => { bpmRef.current = bpm; }, [bpm]);
             useEffect(() => { 
@@ -164,10 +153,11 @@
             useEffect(() => { variationsRef.current = variations; }, [variations]);
             useEffect(() => { presetIdxRef.current = activePresetIdx; }, [activePresetIdx]);
             useEffect(() => { isAmbientRef.current = isAmbientMode; }, [isAmbientMode]);
+            useEffect(() => { activeEngineRef.current = activeEngine; }, [activeEngine]);
 
             useEffect(() => {
                 haltAudioEngine();
-                setBpm(currentEngine.defaultBpm);
+                setBpm(ENGINE_PROFILES[activeEngine].defaultBpm);
                 setActivePresetIdx(0);
                 setVariations({ sub: 0, arp: 1, pings: 0 });
             }, [activeEngine]);
@@ -190,6 +180,7 @@
                     masterGainNodeRef.current.connect(masterLimiter);
                     masterLimiter.connect(ctx.destination);
                 }
+                // CRITICAL HARDWARE ROUTER FIX: Forces browser to unlock state restrictions instantly upon mouse hook
                 if (audioCtxRef.current.state === 'suspended') {
                     audioCtxRef.current.resume();
                 }
@@ -221,127 +212,180 @@
                 return activeBank.chords[cycle];
             };
 
-            // --- DE-SCREECHED CLEAN SYNTHESIS PIPELINES ---
             const playStudioPad = (ctx, destination, time, chord, currentVol) => {
                 if (!chord || currentVol <= 0.001) return;
                 
-                const attack = isAmbientRef.current ? 2.2 : 0.4;
-                const release = isAmbientRef.current ? 3.2 : 1.2;
-
+                const engine = activeEngineRef.current;
                 const nodeFilter = ctx.createBiquadFilter();
-                nodeFilter.type = 'lowpass';
                 
-                if (activeEngine === 'lofi') {
-                    const trackingFreq = Math.min(360, chord[0] * 2.2);
-                    nodeFilter.frequency.setValueAtTime(trackingFreq, time);
+                let optionalNotchNode = null;
+                if (engine === 'deepFocus') {
+                    optionalNotchNode = ctx.createBiquadFilter();
+                    optionalNotchNode.type = 'notch';
+                    optionalNotchNode.frequency.setValueAtTime(850, time); 
+                    optionalNotchNode.Q.setValueAtTime(0.4, time);
+                }
+
+                nodeFilter.type = 'lowpass';
+                if (engine === 'lofi') {
+                    nodeFilter.frequency.setValueAtTime(Math.min(360, chord[0] * 2.2), time);
                     nodeFilter.Q.setValueAtTime(0.3, time);
-                } else if (activeEngine === 'cinema') {
-                    // Muffled warm lowpass cut block specifically designed for felted orchestral strings
+                } else if (engine === 'cinema') {
                     nodeFilter.frequency.setValueAtTime(420, time);
+                    nodeFilter.Q.setValueAtTime(0.2, time);
+                } else if (engine === 'deepFocus') {
+                    nodeFilter.frequency.setValueAtTime(290, time);
+                    nodeFilter.Q.setValueAtTime(0.1, time);
+                } else if (engine === 'futureGarage') {
+                    nodeFilter.frequency.setValueAtTime(550, time);
                     nodeFilter.Q.setValueAtTime(0.2, time);
                 } else {
                     nodeFilter.frequency.setValueAtTime(isAmbientRef.current ? 600 : 850, time);
                 }
 
+                const attack = (engine === 'deepFocus') ? 3.8 : 0.8;
+                const release = (engine === 'deepFocus') ? 4.5 : 2.0;
+
                 chord.slice(0, 3).forEach((freq, idx) => {
                     const osc = ctx.createOscillator();
                     const gain = ctx.createGain();
                     
-                    osc.type = currentEngine.padWave;
-                    
-                    let lofiWow = 0;
-                    if (activeEngine === 'lofi') {
-                        const lfo1 = Math.sin(time * 0.45) * 0.8;
-                        const lfo2 = Math.cos(time * 1.1) * 0.4;
-                        lofiWow = lfo1 + lfo2;
-                    } else if (activeEngine === 'cinema') {
-                        // Soft slow human bow movement simulation
-                        lofiWow = Math.sin(time * 0.25) * 0.3;
-                    }
+                    osc.type = (engine === 'deepFocus' || engine === 'futureGarage') ? 'sine' : ENGINE_PROFILES[engine].padWave;
                     
                     osc.frequency.setValueAtTime(freq, time);
-                    osc.detune.setValueAtTime((idx * 3.5 - 3.5) + lofiWow, time);
+                    osc.detune.setValueAtTime(idx * 4.0 - 4.0, time);
 
                     gain.gain.setValueAtTime(0.001, time);
-                    gain.gain.linearRampToValueAtTime((isAmbientRef.current ? 0.13 : 0.08) * currentVol, time + attack);
-                    
-                    gain.gain.setValueAtTime((isAmbientRef.current ? 0.13 : 0.08) * currentVol, time + attack + 1.8);
+                    const targetGain = (engine === 'deepFocus') ? 0.12 : 0.08;
+                    gain.gain.linearRampToValueAtTime(targetGain * currentVol, time + attack);
+                    gain.gain.setValueAtTime(targetGain * currentVol, time + attack + 1.5);
                     gain.gain.exponentialRampToValueAtTime(0.001, time + attack + release);
 
-                    osc.connect(gain); gain.connect(nodeFilter);
-                    osc.start(time); osc.stop(time + attack + release + 0.25);
-                });
+                    osc.connect(gain);
+                    if (optionalNotchNode) {
+                        gain.connect(optionalNotchNode); optionalNotchNode.connect(nodeFilter);
+                    } else {
+                        gain.connect(nodeFilter);
+                    }
+                    nodeFilter.connect(destination);
 
-                nodeFilter.connect(destination);
+                    osc.start(time); osc.stop(time + attack + release + 0.3);
+                });
             };
 
             const playStudioSub = (ctx, destination, time, chord, currentVol) => {
                 if (!chord || currentVol <= 0.001) return;
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.type = 'sine';
+                const engine = activeEngineRef.current;
                 
-                const lowpassFilter = ctx.createBiquadFilter();
-                lowpassFilter.type = 'lowpass';
-                lowpassFilter.frequency.setValueAtTime(activeEngine === 'lofi' || activeEngine === 'cinema' ? 75 : 100, time); 
-                
-                osc.frequency.setValueAtTime(chord[0] / 2, time);
-                gain.gain.setValueAtTime(0.001, time);
-                gain.gain.linearRampToValueAtTime(0.35 * currentVol, time + 0.12);
-                gain.gain.exponentialRampToValueAtTime(0.001, time + 1.2);
+                const subFilter = ctx.createBiquadFilter();
+                subFilter.type = 'lowpass';
+                subFilter.frequency.setValueAtTime((engine === 'futureGarage') ? 220 : 80, time);
 
-                osc.connect(lowpassFilter); lowpassFilter.connect(gain); gain.connect(destination);
-                osc.start(time); osc.stop(time + 1.4);
+                const oscPrimary = ctx.createOscillator();
+                const gain = ctx.createGain();
+                oscPrimary.type = 'sine';
+
+                let baseFreq = chord[0] / 2;
+                if (engine === 'deepFocus') baseFreq = 50.00; 
+
+                oscPrimary.frequency.setValueAtTime(baseFreq, time);
+                oscPrimary.connect(subFilter);
+
+                let oscOvertone = null;
+                if (engine === 'futureGarage') {
+                    oscOvertone = ctx.createOscillator();
+                    oscOvertone.type = 'triangle';
+                    oscOvertone.frequency.setValueAtTime(baseFreq * 2, time); 
+                    oscOvertone.detune.setValueAtTime(8, time);
+                    oscOvertone.connect(subFilter);
+                }
+
+                gain.gain.setValueAtTime(0.001, time);
+                const attack = (engine === 'deepFocus' || engine === 'futureGarage') ? 0.25 : 0.1;
+                const release = (engine === 'deepFocus') ? 2.5 : 1.2;
+
+                gain.gain.linearRampToValueAtTime((engine === 'futureGarage' ? 0.24 : 0.35) * currentVol, time + attack);
+                gain.gain.exponentialRampToValueAtTime(0.001, time + release);
+
+                subFilter.connect(gain); gain.connect(destination);
+
+                oscPrimary.start(time); oscPrimary.stop(time + release + 0.2);
+                if (oscOvertone) { oscOvertone.start(time); oscOvertone.stop(time + release + 0.2); }
             };
 
             const playStudioArp = (ctx, destination, time, chord, step, currentVol) => {
-                if (!chord || currentVol <= 0.001 || (isAmbientRef.current && step % 2 !== 0)) return;
+                if (!chord || currentVol <= 0.001) return;
+                const engine = activeEngineRef.current;
+
+                if (engine === 'deepFocus' && (step !== 0 && step !== 5 && step !== 11)) return;
+                if (engine === 'futureGarage' && (step !== 2 && step !== 5 && step !== 7 && step !== 10 && step !== 13 && step !== 15)) return;
+
+                if (engine !== 'deepFocus' && engine !== 'futureGarage' && isAmbientRef.current && step % 2 !== 0) return;
+
+                const arpFilter = ctx.createBiquadFilter();
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
-                
-                osc.type = currentEngine.arpWave;
-                
+
                 let notePitch = chord[step % chord.length] * 2;
-                
-                // SYSTEM DESIGN: Pendulum Ostinato Melody transformation logic for Neo-Classical genre
-                if (activeEngine === 'cinema') {
-                    const anchorNote = chord[0] * 2; // Stabilizing base root anchor
+
+                if (engine === 'futureGarage') {
+                    const bufferSize = ctx.sampleRate * 0.04; 
+                    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+
+                    const noiseSource = ctx.createBufferSource();
+                    noiseSource.buffer = buffer;
+
+                    arpFilter.type = 'highpass';
+                    arpFilter.frequency.setValueAtTime(6500, time); 
+
+                    gain.gain.setValueAtTime(0.001, time);
+                    gain.gain.linearRampToValueAtTime(0.02 * currentVol, time + 0.003);
+                    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.035); 
+
+                    noiseSource.connect(arpFilter); arpFilter.connect(gain); gain.connect(destination);
+                    noiseSource.start(time); noiseSource.stop(time + 0.05);
+                    return;
+                }
+
+                osc.type = 'sine';
+                if (engine === 'cinema') {
+                    const anchorNote = chord[0] * 2;
                     const movingMelodyNote = chord[Math.floor(step / 2) % chord.length] * 2;
-                    // Alternates rhythmically back and forth every step to simulate organic left/right hand patterns
                     notePitch = (step % 2 === 0) ? anchorNote : movingMelodyNote;
+                } else if (engine === 'deepFocus') {
+                    notePitch = chord[step % chord.length] * 4; 
                 }
 
                 osc.frequency.setValueAtTime(notePitch, time);
-
-                const release = isAmbientRef.current ? 0.35 : 0.14;
-                
-                const arpFilter = ctx.createBiquadFilter();
                 arpFilter.type = 'lowpass';
-                arpFilter.frequency.setValueAtTime(activeEngine === 'lofi' || activeEngine === 'cinema' ? 650 : 1800, time);
+                arpFilter.frequency.setValueAtTime((engine === 'deepFocus') ? 1400 : 1800, time); 
 
                 gain.gain.setValueAtTime(0.001, time);
-                // System Design Anti-Aliasing micro-fade curve prevents structural click screeches
-                gain.gain.linearRampToValueAtTime((isAmbientRef.current ? 0.04 : 0.08) * currentVol, time + 0.008);
-                gain.gain.exponentialRampToValueAtTime(0.001, time + release);
+                const targetAmp = (engine === 'deepFocus') ? 0.018 : 0.07; 
+                gain.gain.linearRampToValueAtTime(targetAmp * currentVol, time + 0.008);
+                gain.gain.exponentialRampToValueAtTime(0.001, time + (engine === 'deepFocus' ? 0.5 : 0.15));
 
                 osc.connect(arpFilter); arpFilter.connect(gain); gain.connect(destination);
-                osc.start(time); osc.stop(time + release + 0.05);
+                osc.start(time); osc.stop(time + 0.6);
             };
 
             const playStudioPing = (ctx, destination, time, chord, currentVol) => {
                 if (!chord || currentVol <= 0.001 || isAmbientRef.current) return;
+                const engine = activeEngineRef.current;
+                if (engine === 'deepFocus' || engine === 'futureGarage') return; 
+
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
-                
                 const pingFilter = ctx.createBiquadFilter();
                 pingFilter.type = 'lowpass';
-                pingFilter.frequency.setValueAtTime(activeEngine === 'lofi' || activeEngine === 'cinema' ? 800 : 2500, time);
+                pingFilter.frequency.setValueAtTime(engine === 'lofi' || engine === 'cinema' ? 800 : 2500, time);
 
                 osc.type = 'sine';
                 osc.frequency.setValueAtTime(chord[2 % chord.length] * 4, time);
                 
                 gain.gain.setValueAtTime(0.001, time);
-                // System Design Anti-Aliasing micro-fade curve
                 gain.gain.linearRampToValueAtTime(0.015 * currentVol, time + 0.006);
                 gain.gain.exponentialRampToValueAtTime(0.001, time + 0.09);
 
@@ -351,27 +395,26 @@
 
             const playStudioNoiseWash = (ctx, destination, time, currentVol) => {
                 if (currentVol <= 0.001) return;
+                const engine = activeEngineRef.current;
                 const bufferSize = ctx.sampleRate * 2.0;
                 const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
                 const data = buffer.getChannelData(0);
                 
-                for (let i = 0; i < bufferSize; i++) {
-                    let sampleVal = Math.random() * 2 - 1;
-                    data[i] = Math.tanh(sampleVal * 0.40); 
-                }
+                for (let i = 0; i < bufferSize; i++) data[i] = Math.tanh((Math.random() * 2 - 1) * 0.40);
 
                 const source = ctx.createBufferSource();
                 source.buffer = buffer;
                 
                 const bandpassFilter = ctx.createBiquadFilter();
                 bandpassFilter.type = 'bandpass';
-                bandpassFilter.Q.setValueAtTime(currentEngine.washRes, time);
+                bandpassFilter.Q.setValueAtTime(ENGINE_PROFILES[engine].washRes, time);
                 bandpassFilter.frequency.setValueAtTime(80, time);
-                bandpassFilter.frequency.exponentialRampToValueAtTime(currentEngine.washFreq, time + 0.8);
+                bandpassFilter.frequency.exponentialRampToValueAtTime(ENGINE_PROFILES[engine].washFreq, time + 0.8);
 
                 const gain = ctx.createGain();
                 gain.gain.setValueAtTime(0.001, time);
-                gain.gain.linearRampToValueAtTime((isAmbientRef.current ? 0.025 : 0.012) * currentVol, time + 0.4);
+                const targetWash = (engine === 'deepFocus') ? 0.012 : 0.022;
+                gain.gain.linearRampToValueAtTime(targetWash * currentVol, time + 0.4);
                 gain.gain.exponentialRampToValueAtTime(0.001, time + 1.5);
 
                 source.connect(bandpassFilter); bandpassFilter.connect(gain); gain.connect(destination);
@@ -386,7 +429,7 @@
                     const loopGlobalStep = internalStepRef.current;
                     const visual16Step = loopGlobalStep % 16;
                     
-                    const activeChord = getActiveChordForPreset(loopGlobalStep, currentEngine, presetIdxRef.current);
+                    const activeChord = getActiveChordForPreset(loopGlobalStep, ENGINE_PROFILES[activeEngineRef.current], presetIdxRef.current);
                     const v = volumesRef.current;
                     const vars = variationsRef.current;
                     const destinationBus = masterGainNodeRef.current;
@@ -404,11 +447,10 @@
                     }, (time - audioCtxRef.current.currentTime) * 1000);
 
                     nextNoteTimeRef.current += (60.0 / bpmRef.current / 4.0);
-                    internalStepRef.current = (internalStepRef.current + 1) % 64;
+                    internalStepRef.current = (internalStepRef.current + 1) % 16; // Restricts bounds safely to a 16-step sequence loop
                 }
             };
 
-            // --- BACKGROUND MATRIX COMPILER SYSTEM ---
             const renderSingleTrackPromise = (trackIndex, targetPreset, targetVars, targetBpm, targetVols, targetMasterVol, forceStaticMix) => {
                 return new Promise((resolve, reject) => {
                     const sampleRate = 44100;
@@ -443,10 +485,10 @@
                         let evolvedPresetIndex = targetPreset;
                         if (!forceStaticMix) {
                             const barAllocationOffset = Math.floor(step / 64);
-                            evolvedPresetIndex = (targetPreset + barAllocationOffset) % currentEngine.presets.length;
+                            evolvedPresetIndex = (targetPreset + barAllocationOffset) % ENGINE_PROFILES[activeEngineRef.current].presets.length;
                         }
                         
-                        const activeChord = getActiveChordForPreset(step, currentEngine, evolvedPresetIndex);
+                        const activeChord = getActiveChordForPreset(step, ENGINE_PROFILES[activeEngineRef.current], evolvedPresetIndex);
 
                         if (patternModulo16 === 0) playStudioPad(offlineCtx, offlineGainBus, time, activeChord, targetVols.pad);
                         if (patternModulo16 === 4) playStudioNoiseWash(offlineCtx, offlineGainBus, time, targetVols.wash);
@@ -469,10 +511,10 @@
                         const fileOutputBuffer = new ArrayBuffer(44 + totalSamplesLength * 2);
                         const view = new DataView(fileOutputBuffer);
 
-                        view.setUint32(0, 0x52494646, false); // "RIFF"
+                        view.setUint32(0, 0x52494646, false); 
                         view.setUint32(4, 36 + totalSamplesLength * 2, true);
-                        view.setUint32(8, 0x57415645, false); // "WAVE"
-                        view.setUint32(12, 0x666d7420, false); // "fmt "
+                        view.setUint32(8, 0x57415645, false); 
+                        view.setUint32(12, 0x666d7420, false); 
                         view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, 1, true);
                         view.setUint32(24, sampleRate, true); view.setUint32(28, sampleRate * 2, true);
                         view.setUint16(32, 2, true); view.setUint16(34, 16, true);
@@ -513,7 +555,7 @@
                     a.download = `${activeEngine.toUpperCase()}_StudioMix_${bpm}BPM_${durationString}.wav`;
                     document.body.appendChild(a); a.click(); document.body.removeChild(a);
                 } catch(err) {
-                    console.error("Studio custom mix extractor fault:", err);
+                    console.error("Studio mix extraction failure:", err);
                 }
 
                 setIsSingleExporting(false);
@@ -540,7 +582,7 @@
                     let targetVars = { ...variations };
 
                     if (i > 0) {
-                        targetPreset = Math.floor(Math.random() * currentEngine.presets.length);
+                        targetPreset = Math.floor(Math.random() * ENGINE_PROFILES[activeEngineRef.current].presets.length);
                         targetVars = {
                             sub: Math.floor(Math.random() * PATTERN_VARIATIONS.sub.length),
                             arp: Math.floor(Math.random() * PATTERN_VARIATIONS.arp.length),
@@ -552,7 +594,7 @@
                         const result = await renderSingleTrackPromise(i + 1, targetPreset, targetVars, currentBpmCapture, currentVolsCapture, currentMasterVolCapture, false);
                         compiledTracks.push(result);
                     } catch (fault) {
-                        console.error(`Batch rendering error at array index position [${i + 1}]:`, fault);
+                        console.error(`Batch rendering error at offset [${i + 1}]:`, fault);
                     }
                 }
 
@@ -600,43 +642,53 @@
 
             const isProcessing = isExporting || isSingleExporting;
 
-            return React.createElement('div', { className: 'max-w-5xl mx-auto px-4 py-8' },
-                // Absolute Engine Core Hardware Switcher Routing Dock
-                React.createElement('div', { className: 'mb-8 bg-slate-950/70 p-4 rounded-xl border border-slate-900 flex items-center justify-center gap-3 shadow-xl shadow-black/40' },
-                    React.createElement('span', { className: 'text-xs uppercase font-hud tracking-widest text-slate-500 font-black mr-2' }, 'Hardware Router:'),
-                    React.createElement('button', {
-                        onClick: () => setActiveEngine('space'),
-                        className: `px-4 py-2.5 font-hud text-[10px] tracking-wider font-bold rounded-lg border transition-all cursor-pointer ${activeEngine === 'space' ? 'bg-cyan-950 text-cyan-400 border-cyan-500/40 scale-[1.02]' : 'bg-black/40 text-slate-500 border-slate-900 hover:text-slate-300'}`
-                    }, '🚀 OPTION A: SPACE AMBIENT'),
-                    React.createElement('button', {
-                        onClick: () => setActiveEngine('lofi'),
-                        className: `px-4 py-2.5 font-hud text-[10px] tracking-wider font-bold rounded-lg border transition-all cursor-pointer ${activeEngine === 'lofi' ? 'bg-amber-950 text-amber-500 border-amber-500/40 scale-[1.02]' : 'bg-black/40 text-slate-500 border-slate-900 hover:text-slate-300'}`
-                    }, '☕ OPTION B: LO-FI LOUNGE'),
-                    React.createElement('button', {
-                        onClick: () => setActiveEngine('cinema'),
-                        className: `px-4 py-2.5 font-hud text-[10px] tracking-wider font-bold rounded-lg border transition-all cursor-pointer ${activeEngine === 'cinema' ? 'bg-emerald-950 text-emerald-400 border-emerald-500/40 scale-[1.02]' : 'bg-black/40 text-slate-500 border-slate-900 hover:text-slate-300'}`
-                    }, '🎻 OPTION C: NEO-CLASSICAL')
+            return React.createElement('div', { className: 'w-full max-w-7xl mx-auto px-2 sm:px-4 py-4 sm:py-8' },
+                // Hardware Dynamic System Switcher Router Enclosure Dock Grid
+                React.createElement('div', { className: 'mb-6 bg-slate-950/70 p-3 sm:p-4 rounded-xl border border-slate-900 flex flex-col xl:flex-row items-center justify-center gap-3 shadow-xl shadow-black/40' },
+                    React.createElement('span', { className: 'text-xs uppercase font-hud tracking-widest text-slate-500 font-black xl:mr-2 text-center' }, 'Hardware Router:'),
+                    React.createElement('div', { className: 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 w-full xl:w-auto' },
+                        React.createElement('button', {
+                            onClick: () => { setActiveEngine('space'); initAudioContextHardwareGraph(); },
+                            className: `px-2 sm:px-4 py-2.5 font-hud text-[9px] sm:text-[10px] tracking-wider font-bold rounded-lg border transition-all cursor-pointer truncate ${activeEngine === 'space' ? 'bg-cyan-950 text-cyan-400 border-cyan-500/40 scale-[1.01]' : 'bg-black/40 text-slate-500 border-slate-900 hover:text-slate-300'}`
+                        }, '🚀 A: SPACE'),
+                        React.createElement('button', {
+                            onClick: () => { setActiveEngine('lofi'); initAudioContextHardwareGraph(); },
+                            className: `px-2 sm:px-4 py-2.5 font-hud text-[9px] sm:text-[10px] tracking-wider font-bold rounded-lg border transition-all cursor-pointer truncate ${activeEngine === 'lofi' ? 'bg-amber-950 text-amber-500 border-amber-500/40 scale-[1.01]' : 'bg-black/40 text-slate-500 border-slate-900 hover:text-slate-300'}`
+                        }, '☕ B: LO-FI'),
+                        React.createElement('button', {
+                            onClick: () => { setActiveEngine('cinema'); initAudioContextHardwareGraph(); },
+                            className: `px-2 sm:px-4 py-2.5 font-hud text-[9px] sm:text-[10px] tracking-wider font-bold rounded-lg border transition-all cursor-pointer truncate ${activeEngine === 'cinema' ? 'bg-emerald-950 text-emerald-400 border-emerald-500/40 scale-[1.01]' : 'bg-black/40 text-slate-500 border-slate-900 hover:text-slate-300'}`
+                        }, '🎻 C: CLASSICAL'),
+                        React.createElement('button', {
+                            onClick: () => { setActiveEngine('deepFocus'); initAudioContextHardwareGraph(); },
+                            className: `px-2 sm:px-4 py-2.5 font-hud text-[9px] sm:text-[10px] tracking-wider font-bold rounded-lg border transition-all cursor-pointer truncate ${activeEngine === 'deepFocus' ? 'bg-violet-950 text-violet-400 border-violet-500/40 scale-[1.01]' : 'bg-black/40 text-slate-500 border-slate-900 hover:text-slate-300'}`
+                        }, '🎓 D: ESSAY BED'),
+                        React.createElement('button', {
+                            onClick: () => { setActiveEngine('futureGarage'); initAudioContextHardwareGraph(); },
+                            className: `px-2 sm:px-4 py-2.5 font-hud text-[9px] sm:text-[10px] tracking-wider font-bold rounded-lg border transition-all cursor-pointer truncate ${activeEngine === 'futureGarage' ? 'bg-rose-950 text-rose-400 border-rose-500/40 scale-[1.01]' : 'bg-black/40 text-slate-500 border-slate-900 hover:text-slate-300'}`
+                        }, '🎬 M: REELS BED')
+                    )
                 ),
 
-                // Isolated Rackmount Enclosure Window Frame
-                React.createElement('div', { className: `p-6 rounded-3xl border transition-all duration-500 ${currentEngine.borderClass} ${currentEngine.bgClass}` },
-                    React.createElement('header', { className: 'text-center mb-8 border-b border-slate-900/60 pb-4' },
-                        React.createElement('h1', { className: `font-hud text-2xl font-black tracking-widest uppercase ${currentEngine.themeClass}` }, currentEngine.name),
-                        React.createElement('p', { className: 'text-slate-500 text-xs uppercase tracking-widest mt-1 font-bold' }, 'Production Workstation Mixing Console Interface')
+                // Main Studio Enclosure Frame Container Panel
+                React.createElement('div', { className: `p-3 sm:p-6 rounded-2xl sm:rounded-3xl border transition-all duration-500 ${currentEngine.borderClass} ${currentEngine.bgClass}` },
+                    React.createElement('header', { className: 'text-center mb-6 border-b border-slate-900/60 pb-4' },
+                        React.createElement('h1', { className: `font-hud text-lg sm:text-2xl font-black tracking-widest uppercase ${currentEngine.themeClass}` }, currentEngine.name),
+                        React.createElement('p', { className: 'text-slate-400 text-[10px] sm:text-xs uppercase tracking-widest mt-1 font-bold' }, 'Production Workstation Mixing Console Interface')
                     ),
 
-                    // Master Desk Controllers
-                    React.createElement('div', { className: 'bg-black/50 border border-slate-900/60 p-6 rounded-2xl mb-6 grid grid-cols-1 md:grid-cols-3 gap-6' },
+                    // Master Attenuators Deck Parameters Control Unit
+                    React.createElement('div', { className: 'bg-black/50 border border-slate-900/60 p-4 sm:p-6 rounded-2xl mb-6 grid grid-cols-1 lg:grid-cols-3 gap-6' },
                         React.createElement('div', { className: 'space-y-3' },
                             React.createElement('h3', { className: `text-xs uppercase font-bold tracking-wider ${currentEngine.themeClass}` }, '01 / Transport & Master Volume'),
                             React.createElement('div', { className: 'flex gap-2' },
                                 React.createElement('button', {
                                     onClick: startAudioEngine, disabled: isPlaying || isProcessing,
-                                    className: `flex-1 py-2.5 px-1 rounded-xl font-hud text-xs tracking-widest font-black border transition-all cursor-pointer ${isPlaying || isProcessing ? 'bg-zinc-900 text-zinc-600 border-zinc-950' : 'bg-emerald-600 text-white border-emerald-500 hover:bg-emerald-500'}`
+                                    className: `flex-1 py-2.5 px-1 rounded-xl font-hud text-[11px] tracking-wider font-black border transition-all cursor-pointer ${isPlaying || isProcessing ? 'bg-zinc-900 text-zinc-600 border-zinc-950' : 'bg-emerald-600 text-white border-emerald-500 hover:bg-emerald-500'}`
                                 }, 'START ▶'),
                                 React.createElement('button', {
                                     onClick: haltAudioEngine, disabled: !isPlaying || isProcessing,
-                                    className: `flex-1 py-2.5 px-1 rounded-xl font-hud text-xs tracking-widest font-black border transition-all cursor-pointer ${!isPlaying || isProcessing ? 'bg-zinc-900 text-zinc-600 border-zinc-950' : 'bg-rose-700 text-white border-rose-600 hover:bg-rose-600'}`
+                                    className: `flex-1 py-2.5 px-1 rounded-xl font-hud text-[11px] tracking-wider font-black border transition-all cursor-pointer ${!isPlaying || isProcessing ? 'bg-zinc-900 text-zinc-600 border-zinc-950' : 'bg-rose-700 text-white border-rose-600 hover:bg-rose-600'}`
                                 }, 'STOP ■'),
                                 React.createElement('button', {
                                     onClick: triggerGlobalMutationCenter,
@@ -664,8 +716,8 @@
                             React.createElement('button', {
                                 onClick: () => setIsAmbientMode(!isAmbientMode),
                                 disabled: isProcessing,
-                                className: 'w-full py-3 px-4 rounded-xl font-hud font-bold text-xs tracking-widest bg-black/40 text-slate-300 border border-slate-800 hover:border-slate-700 cursor-pointer disabled:opacity-30'
-                            }, isAmbientMode ? '🌌 PROFILE: DEEP BLENDED DRONE WASH' : '📡 PROFILE: ENHANCED HARMONY LINES'),
+                                className: 'w-full py-2.5 px-4 rounded-xl font-hud font-bold text-[10px] tracking-wider bg-black/40 text-slate-300 border border-slate-800 hover:border-slate-700 cursor-pointer disabled:opacity-30 text-center truncate'
+                            }, isAmbientMode ? '🌌 PROFILE: DEEP BLENDED WASH' : '📡 PROFILE: ENHANCED LINES'),
                             
                             React.createElement('div', { className: 'space-y-1 bg-black/40 p-2 rounded-lg border border-slate-900' },
                                 React.createElement('div', { className: 'text-[10px] text-slate-500 font-bold flex justify-between' },
@@ -686,19 +738,17 @@
                             React.createElement('h3', { className: `text-xs uppercase font-bold tracking-wider ${currentEngine.themeClass}` }, '03 / Automated Batch Exporter Center'),
                             React.createElement('div', { className: 'grid grid-cols-2 gap-2 mb-2' },
                                 React.createElement('div', null,
-                                    React.createElement('label', { className: 'text-[10px] text-slate-500 uppercase block mb-1 font-bold' }, 'Length / Track'),
+                                    React.createElement('label', { className: 'text-[10px] text-slate-500 uppercase block mb-1 font-bold' }, 'Length'),
                                     React.createElement('select', {
                                         value: exportSeconds, onChange: (e) => setExportSeconds(Number(e.target.value)),
                                         disabled: isProcessing,
-                                        className: 'w-full bg-black border border-slate-900 text-slate-400 font-mono text-xs rounded p-2.5 cursor-pointer focus:outline-none'
+                                        className: 'w-full bg-black border border-slate-900 text-slate-400 font-mono text-xs rounded p-2 cursor-pointer focus:outline-none'
                                     },
-                                        React.createElement('option', { value: 30 }, '30 Seconds'),
-                                        React.createElement('option', { value: 60 }, '1 Minute'),
-                                        React.createElement('option', { value: 180 }, '3 Minutes'),
-                                        React.createElement('option', { value: 300 }, '5 Minutes'),
-                                        React.createElement('option', { value: 600 }, '10 Minutes'),
-                                        React.createElement('option', { value: 900 }, '15 Minutes'),
-                                        React.createElement('option', { value: 1800 }, '30 Minutes')
+                                        React.createElement('option', { value: 30 }, '30 Sec'),
+                                        React.createElement('option', { value: 60 }, '1 Min'),
+                                        React.createElement('option', { value: 180 }, '3 Min'),
+                                        React.createElement('option', { value: 300 }, '5 Min'),
+                                        React.createElement('option', { value: 600 }, '10 Min')
                                     )
                                 ),
                                 React.createElement('div', null,
@@ -706,9 +756,9 @@
                                     React.createElement('select', {
                                         value: batchSize, onChange: (e) => setBatchSize(Number(e.target.value)),
                                         disabled: isProcessing,
-                                        className: 'w-full bg-black border border-slate-900 text-slate-400 font-mono text-xs rounded p-2.5 cursor-pointer focus:outline-none'
+                                        className: 'w-full bg-black border border-slate-900 text-slate-400 font-mono text-xs rounded p-2 cursor-pointer focus:outline-none'
                                     },
-                                        [1, 2, 5, 10, 15, 20].map(val => 
+                                        [1, 2, 5, 10].map(val => 
                                             React.createElement('option', { key: val, value: val }, `${val} ${val === 1 ? 'Track' : 'Tracks'}`)
                                         )
                                     )
@@ -718,22 +768,22 @@
                                 React.createElement('button', {
                                     onClick: triggerSingleCustomExport, 
                                     disabled: isProcessing,
-                                    className: `flex-1 py-3 px-1 rounded font-hud font-bold text-[10px] tracking-tight border transition-all cursor-pointer ${isSingleExporting ? 'bg-zinc-900 text-yellow-400 border-zinc-800 animate-pulse' : 'bg-black text-yellow-400 border-yellow-500/30 hover:bg-yellow-500/10'}`
-                                }, isSingleExporting ? `MIXING ${batchStatus.currentProgress}%` : '💾 BAKE ACTIVE MIX'),
+                                    className: `flex-1 py-2 px-1 rounded font-hud font-bold text-[9px] sm:text-[10px] tracking-tight border transition-all cursor-pointer ${isSingleExporting ? 'bg-zinc-900 text-yellow-400 border-zinc-800 animate-pulse' : 'bg-black text-yellow-400 border-yellow-500/30 hover:bg-yellow-500/10'}`
+                                }, isSingleExporting ? `MIXING ${batchStatus.currentProgress}%` : '💾 BAKE MIX'),
                                 React.createElement('button', {
                                     onClick: triggerBatchExport, 
                                     disabled: isProcessing,
-                                    className: `flex-1 py-3 px-1 rounded font-hud font-bold text-[10px] tracking-tight border transition-all cursor-pointer ${isExporting ? 'bg-zinc-900 text-yellow-500 border-zinc-800 animate-pulse' : 'bg-black text-yellow-400 border-yellow-500/30 hover:bg-yellow-500/10'}`
-                                }, isExporting ? `BATCH [${batchStatus.current}/${batchStatus.total}]` : '💾 RUN BATCH OUT')
+                                    className: `flex-1 py-2 px-1 rounded font-hud font-bold text-[9px] sm:text-[10px] tracking-tight border transition-all cursor-pointer ${isExporting ? 'bg-zinc-900 text-yellow-500 border-zinc-800 animate-pulse' : 'bg-black text-yellow-400 border-yellow-500/30 hover:bg-yellow-500/10'}`
+                                }, isExporting ? `BATCH [${batchStatus.current}/${batchStatus.total}]` : '💾 RUN BATCH')
                             )
                         )
                     ),
 
-                    // Premium High-Density 10-Theme Control Deck Grid Rack
-                    React.createElement('div', { className: 'bg-black/30 border border-slate-900/40 p-4 rounded-xl mb-6 space-y-3' },
+                    // Active Engine Preset Bank Switching Grid Matrix
+                    React.createElement('div', { className: 'bg-black/30 border border-slate-900/40 p-3 sm:p-4 rounded-xl mb-6 space-y-3' },
                         React.createElement('div', null,
                             React.createElement('span', { className: 'text-[10px] text-slate-500 uppercase tracking-widest block font-bold' }, 'Active Dynamic Vault Preset Channel'),
-                            React.createElement('span', { className: `text-sm font-hud font-black ${currentEngine.themeClass}` }, `${activePresetIdx < 9 ? '0' : ''}${activePresetIdx + 1} // ${currentEngine.presets[activePresetIdx].name}`)
+                            React.createElement('span', { className: `text-xs sm:text-sm font-hud font-black ${currentEngine.themeClass}` }, `${activePresetIdx < 9 ? '0' : ''}${activePresetIdx + 1} // ${currentEngine.presets[activePresetIdx].name}`)
                         ),
                         React.createElement('div', { className: 'grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-2' },
                             currentEngine.presets.map((p, idx) => React.createElement('button', {
@@ -747,18 +797,18 @@
                         )
                     ),
 
-                    // Matrix Channel Tracks & Channel Mixers
+                    // Multi-Channel Mixing Console Strip Array
                     React.createElement('div', { className: 'space-y-4' },
                         [
-                            { id: 'pad', name: activeEngine === 'cinema' ? 'Felt String Ensemble' : activeEngine === 'space' ? 'Deep Space Pad' : 'Lo-Fi Piano Pad', icon: '🌌', detail: 'Cycles rolling harmonic layers' },
-                            { id: 'sub', name: activeEngine === 'cinema' ? 'Double-Bass Drone' : 'Sub Bass Floor', icon: '🕳️', detail: 'Tracks foundational root structures', isReRollable: true, rKey: 'sub' },
-                            { id: 'arp', name: activeEngine === 'cinema' ? 'Felt Piano Ostinato' : 'Arpeggio Melody', icon: '🛰️', detail: 'Generates rhythmic lines', isReRollable: true, rKey: 'arp' },
-                            { id: 'pings', name: activeEngine === 'cinema' ? 'Violin Pizzicato Pluck' : 'Rhythmic Beeps', icon: '📟', detail: 'Fires transient high accents', isReRollable: true, rKey: 'pings' },
-                            { id: 'wash', name: activeEngine === 'cinema' ? 'Acoustic Studio Room Air' : activeEngine === 'space' ? 'Stellar Noise Wash' : 'Vinyl Noise Wash', icon: '💨', detail: 'Sweeps filtered texture noise fields' }
+                            { id: 'pad', name: activeEngine === 'cinema' ? 'Felt String Ensemble' : activeEngine === 'space' ? 'Deep Space Pad' : activeEngine === 'lofi' ? 'Lo-Fi Piano Pad' : activeEngine === 'deepFocus' ? 'Notched Sine Focus Pad' : 'Muted Organ Suspensions', icon: '🌌', detail: 'Cycles rolling harmonic layers' },
+                            { id: 'sub', name: activeEngine === 'cinema' ? 'Double-Bass Drone' : activeEngine === 'deepFocus' ? '50Hz Sub Root Anchor' : activeEngine === 'futureGarage' ? 'Dual-Tone Reese Overtones' : 'Sub Bass Floor', icon: '🕳️', detail: 'Tracks foundational root structures', isReRollable: activeEngine !== 'deepFocus', rKey: 'sub' },
+                            { id: 'arp', name: activeEngine === 'cinema' ? 'Felt Piano Ostinato' : activeEngine === 'deepFocus' ? 'Damp Focus Glints' : activeEngine === 'futureGarage' ? 'Tight Noise Ghost Shuffles' : 'Arpeggio Melody', icon: '🛰️', detail: 'Generates rhythmic lines', isReRollable: activeEngine !== 'futureGarage', rKey: 'arp' },
+                            { id: 'pings', name: activeEngine === 'cinema' ? 'Violin Pizzicato Pluck' : activeEngine === 'deepFocus' || activeEngine === 'futureGarage' ? 'High Accent Filter (Muted)' : 'Rhythmic Beeps', icon: '📟', detail: 'Fires transient high accents', isReRollable: activeEngine !== 'deepFocus' && activeEngine !== 'futureGarage', rKey: 'pings' },
+                            { id: 'wash', name: activeEngine === 'cinema' ? 'Acoustic Studio Room Air' : activeEngine === 'space' ? 'Stellar Noise Wash' : activeEngine === 'lofi' ? 'Vinyl Noise Wash' : activeEngine === 'deepFocus' ? 'Cognitive White Noise Layer' : 'Tight Decay Rain Shuffles', icon: '💨', detail: 'Sweeps filtered texture noise fields' }
                         ].map(track => {
-                            return React.createElement('div', { key: track.id, className: 'bg-black/20 p-4 rounded-xl border border-slate-900/60 flex flex-col xl:flex-row items-center gap-4' },
-                                // Unified Channel Strip Header Panel
-                                React.createElement('div', { className: 'w-full xl:w-72 flex justify-between items-center bg-black/40 p-2 rounded-lg border border-slate-950 gap-2' },
+                            return React.createElement('div', { key: track.id, className: 'bg-black/20 p-3 sm:p-4 rounded-xl border border-slate-900/60 flex flex-col lg:flex-row items-center gap-4' },
+                                // Channel strip identification panel block
+                                React.createElement('div', { className: 'w-full lg:w-64 flex justify-between items-center bg-black/40 p-2 rounded-lg border border-slate-950 gap-2' },
                                     React.createElement('div', { className: 'truncate flex-1' },
                                         React.createElement('div', { className: 'text-xs text-slate-300 font-bold truncate' }, `${track.icon} ${track.name}`),
                                         React.createElement('div', { className: 'text-[10px] text-slate-500 tracking-tight mt-0.5 leading-none' }, track.detail)
@@ -773,7 +823,7 @@
                                 ),
 
                                 // Individual Channel Mixing Desk Attenuator Slider
-                                React.createElement('div', { className: 'w-full xl:w-48 bg-black/40 px-3 py-1.5 rounded-lg border border-slate-950/60 flex items-center gap-3' },
+                                React.createElement('div', { className: 'w-full lg:w-44 bg-black/40 px-3 py-1.5 rounded-lg border border-slate-950/60 flex items-center gap-3' },
                                     React.createElement('span', { className: 'text-[9px] font-mono tracking-widest text-slate-500 font-bold' }, 'GAIN'),
                                     React.createElement('input', {
                                         type: 'range', min: 0.0, max: 1.0, step: 0.02,
@@ -787,15 +837,15 @@
                                     )
                                 ),
 
-                                // Rhythmic Visual Step Indicator Line
-                                React.createElement('div', { className: 'w-full flex-1 grid grid-cols-16 gap-1' },
+                                // Rhythmic Visual Step Indicator Line (Folds layout cleanly on mobile screen viewports)
+                                React.createElement('div', { className: 'w-full flex-1 grid grid-cols-8 sm:grid-cols-16 gap-1' },
                                     Array.from({ length: 16 }).map((_, stepIdx) => {
                                         const isCurrent = currentStep === stepIdx;
                                         const baseBlockStyle = isCurrent ? currentEngine.gridStyles : { backgroundColor: '#090d16', border: '1px solid #111827' };
                                         return React.createElement('div', {
                                             key: stepIdx,
                                             style: baseBlockStyle,
-                                            className: 'h-7 rounded relative transition-all duration-100'
+                                            className: 'h-6 sm:h-7 rounded relative transition-all duration-100'
                                         });
                                     })
                                 )
