@@ -1,7 +1,7 @@
 # Reverie
 A browser-based ambient music workstation with five distinct sonic engines. No installs, no plugins — just open and play.
 
-🎵 Try it live
+🎵 [Try it live](https://duttatrey.github.io/reverie/)
 
 ## Features
 - **Five sound engines** — Cinematic Space Ambient, Tape-Flutter Lo-Fi Lounge, Minimalist Neo-Classical Ensemble, Deep Focus Essay Bed, and Future Garage Short Bed
